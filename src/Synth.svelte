@@ -5,16 +5,21 @@
 	export let y;
 
 
+	const settings = {
+		baseNote: 261.6256,
+		noteRange: 100
+	}
+
+
 	let synth;
 
 
 	$: {
 		if( synth ) {
-			synth.setNote( 261 + ( y * 60 ) );
+			synth.setNote( settings.baseNote + ( y * settings.noteRange ) );
 		}
 	}
 
-	const settings = {}
 
 	function onClick() {
 		console.log( 'Synth.onClick()' );
@@ -40,4 +45,6 @@
 
 </script>
 
-<svelte:body on:click={onClick} />
+<svelte:body 
+	on:touchstart={onClick}
+	on:click={onClick} />

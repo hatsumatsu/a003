@@ -543,14 +543,18 @@ var app = (function () {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor, remount) {
-    			if (remount) dispose();
-    			dispose = listen_dev(document.body, "click", onClick, false, false, false);
+    			if (remount) run_all(dispose);
+
+    			dispose = [
+    				listen_dev(document.body, "touchstart", onClick, false, false, false),
+    				listen_dev(document.body, "click", onClick, false, false, false)
+    			];
     		},
     		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			dispose();
+    			run_all(dispose);
     		}
     	};
 
@@ -573,8 +577,8 @@ var app = (function () {
     function instance$1($$self, $$props, $$invalidate) {
     	let { x } = $$props;
     	let { y } = $$props;
+    	const settings = { baseNote: 261.6256, noteRange: 100 };
     	let synth;
-    	const settings = {};
 
     	onMount(() => {
     		console.log("Synth.onMount()", Tone.Synth);
@@ -602,7 +606,7 @@ var app = (function () {
     		if ("y" in $$props) $$invalidate(1, y = $$props.y);
     	};
 
-    	$$self.$capture_state = () => ({ onMount, x, y, synth, settings, onClick });
+    	$$self.$capture_state = () => ({ onMount, x, y, settings, synth, onClick });
 
     	$$self.$inject_state = $$props => {
     		if ("x" in $$props) $$invalidate(0, x = $$props.x);
@@ -618,7 +622,7 @@ var app = (function () {
     		if ($$self.$$.dirty & /*synth, y*/ 6) {
     			 {
     				if (synth) {
-    					synth.setNote(261 + y * 60);
+    					synth.setNote(settings.baseNote + y * settings.noteRange);
     				}
     			}
     		}
