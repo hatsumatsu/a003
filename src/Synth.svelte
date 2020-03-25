@@ -22,7 +22,7 @@
 
 
 	function onClick() {
-		console.log( 'Synth.onClick()' );
+		alert( 'Synth.onClick()' );
 
 		Tone.start();	
 	}
