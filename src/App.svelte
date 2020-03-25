@@ -2,6 +2,7 @@
 	import Utils from './utils.js';
 	import { onMount } from 'svelte';
 	import Dot from './Dot.svelte';
+	import Synth from './Synth.svelte';
 
 	let settings = {
 		damping: 4,
@@ -100,6 +101,11 @@
 	bind:y={y}
 />
 
+<Synth 
+	bind:x={x}
+	bind:y={y}
+/>
+
 
 <style>
 	:global( html ),
@@ -111,4 +117,12 @@
 
 		background-color: #000;
 	}
+
+	:global( body ) {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: -1px;
+	}		
 </style>
