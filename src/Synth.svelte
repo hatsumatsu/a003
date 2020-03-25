@@ -22,8 +22,6 @@
 
 
 	function onClick() {
-		alert( 'Synth.onClick()' );
-
 		Tone.start();	
 	}
 
@@ -45,6 +43,7 @@
 
 </script>
 
-<svelte:body 
-	on:touchstart={onClick}
-	on:click={onClick} />
+
+<button
+	on:click={onClick}
+	>Start</button>
