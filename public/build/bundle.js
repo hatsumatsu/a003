@@ -544,7 +544,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Start";
     			attr_dev(button, "class", "start svelte-hv7iqx");
-    			add_location(button, file$1, 98, 0, 1401);
+    			add_location(button, file$1, 98, 0, 1404);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -597,7 +597,7 @@ var app = (function () {
 
     	function onTouchStart() {
     		console.log("Synth.onTouchStart()");
-    		synth.triggerAttack(settings.baseNote + y * settings.noteRange);
+    		synth.triggerAttack(settings.baseNote + y * settings.noteRange, 0);
     		window.navigator.vibrate(100);
     	}
 
