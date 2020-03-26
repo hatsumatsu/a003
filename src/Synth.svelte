@@ -15,19 +15,27 @@
 
 
 	function onClick() {
+		console.log( 'Synth.onClick()' );		
+		
 		Tone.start();	
 	}
 
 
 	function onTouchStart() {
+		console.log( 'Synth.onTouchStart()' );
+
 		synth.triggerAttack( settings.baseNote + ( y * settings.noteRange ) );
 	}
 
 	function onTouchEnd() {
+		console.log( 'Synth.onTouchEnd()' );
+
 		synth.triggerRelease();
 	}
 
 	onMount(() => {
+		console.log( 'Synth.onMount()' );		
+		
 		let interval;
 
 		synth = new Tone.Synth().toMaster();
@@ -64,7 +72,7 @@
 
 <svelte:window 
 	on:touchstart={onTouchStart}
-	on:touchEnd={onTouchEnd}
+	on:touchend={onTouchEnd}
 />
 
 

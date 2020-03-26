@@ -544,7 +544,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Start";
     			attr_dev(button, "class", "start svelte-h5w0eq");
-    			add_location(button, file$1, 70, 0, 897);
+    			add_location(button, file$1, 78, 0, 1061);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -555,7 +555,7 @@ var app = (function () {
 
     			dispose = [
     				listen_dev(window, "touchstart", /*onTouchStart*/ ctx[0], false, false, false),
-    				listen_dev(window, "touchEnd", /*onTouchEnd*/ ctx[1], false, false, false),
+    				listen_dev(window, "touchend", /*onTouchEnd*/ ctx[1], false, false, false),
     				listen_dev(button, "click", onClick, false, false, false)
     			];
     		},
@@ -580,6 +580,7 @@ var app = (function () {
     }
 
     function onClick() {
+    	console.log("Synth.onClick()");
     	Tone.start();
     }
 
@@ -590,14 +591,17 @@ var app = (function () {
     	let synth;
 
     	function onTouchStart() {
+    		console.log("Synth.onTouchStart()");
     		synth.triggerAttack(settings.baseNote + y * settings.noteRange);
     	}
 
     	function onTouchEnd() {
+    		console.log("Synth.onTouchEnd()");
     		synth.triggerRelease();
     	}
 
     	onMount(() => {
+    		console.log("Synth.onMount()");
     		let interval;
     		synth = new Tone.Synth().toMaster();
     		console.log(synth);
