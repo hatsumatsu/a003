@@ -24,7 +24,7 @@
 	function onTouchStart() {
 		console.log( 'Synth.onTouchStart()' );
 
-		synth.triggerAttack( settings.baseNote + ( y * settings.noteRange ), Tone.immediate() );
+		synth.triggerAttack( settings.baseNote + ( -1 * y * settings.noteRange ), Tone.immediate() );
 
 		window.navigator.vibrate( 100 );
 	}
@@ -57,7 +57,7 @@
 		console.log( synth );
 
 		interval = setInterval( () => {
-			synth.frequency.rampTo( settings.baseNote + ( y * settings.noteRange ), 0.5 );
+			synth.frequency.rampTo( settings.baseNote + ( -1 * y * settings.noteRange ), 0.5 );
 		}, 400 );
 
 

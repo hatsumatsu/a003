@@ -544,7 +544,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Start";
     			attr_dev(button, "class", "start svelte-hv7iqx");
-    			add_location(button, file$1, 100, 0, 1466);
+    			add_location(button, file$1, 100, 0, 1476);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -597,7 +597,7 @@ var app = (function () {
 
     	function onTouchStart() {
     		console.log("Synth.onTouchStart()");
-    		synth.triggerAttack(settings.baseNote + y * settings.noteRange, Tone.immediate());
+    		synth.triggerAttack(settings.baseNote + -1 * y * settings.noteRange, Tone.immediate());
     		window.navigator.vibrate(100);
     	}
 
@@ -625,7 +625,7 @@ var app = (function () {
 
     		interval = setInterval(
     			() => {
-    				synth.frequency.rampTo(settings.baseNote + y * settings.noteRange, 0.5);
+    				synth.frequency.rampTo(settings.baseNote + -1 * y * settings.noteRange, 0.5);
     			},
     			400
     		);
