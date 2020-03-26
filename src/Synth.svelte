@@ -24,7 +24,7 @@
 	function onTouchStart() {
 		console.log( 'Synth.onTouchStart()' );
 
-		synth.triggerAttack( settings.baseNote + ( y * settings.noteRange ), Tone.context.currentTime );
+		synth.triggerAttack( settings.baseNote + ( y * settings.noteRange ), Tone.immediate() );
 
 		window.navigator.vibrate( 100 );
 	}
@@ -39,6 +39,8 @@
 		console.log( 'Synth.onMount()' );		
 		
 		let interval;
+		
+		Tone.context.latencyHint = 'interactive';
 
 		synth = new Tone.Synth( {
 			oscillator: {
