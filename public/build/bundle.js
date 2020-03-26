@@ -543,7 +543,8 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Start";
-    			add_location(button, file$1, 46, 0, 553);
+    			attr_dev(button, "class", "start svelte-h5w0eq");
+    			add_location(button, file$1, 58, 0, 692);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -584,14 +585,22 @@ var app = (function () {
     	let synth;
 
     	onMount(() => {
-    		console.log("Synth.onMount()", Tone.Synth);
-    		$$invalidate(2, synth = new Tone.Synth().toMaster());
+    		let interval;
+    		synth = new Tone.Synth().toMaster();
     		console.log(synth);
     		synth.triggerAttack(261);
+
+    		interval = setInterval(
+    			() => {
+    				synth.frequency.rampTo(settings.baseNote + y * settings.noteRange, 0.5);
+    			},
+    			400
+    		);
 
     		// onUnmount
     		return () => {
     			synth.triggerRelease();
+    			clearInterval(interval);
     		};
     	});
 
@@ -614,22 +623,12 @@ var app = (function () {
     	$$self.$inject_state = $$props => {
     		if ("x" in $$props) $$invalidate(0, x = $$props.x);
     		if ("y" in $$props) $$invalidate(1, y = $$props.y);
-    		if ("synth" in $$props) $$invalidate(2, synth = $$props.synth);
+    		if ("synth" in $$props) synth = $$props.synth;
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
-
-    	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*synth, y*/ 6) {
-    			 {
-    				if (synth) {
-    					synth.setNote(settings.baseNote + y * settings.noteRange);
-    				}
-    			}
-    		}
-    	};
 
     	return [x, y];
     }

@@ -1,4 +1,5 @@
  html , body {margin:0;overflow:hidden;color:#fff;background-color:#000} body {position:absolute;left:0;right:0;top:0;bottom:-1px}
 .dot.svelte-1y9zjco{position:fixed;left:0;top:0;box-sizing:border-box;display:block;border:2px solid #d0ff00;border-radius:50%}
+.start.svelte-h5w0eq{position:fixed;left:0;bottom:0;z-index:1000;margin:1rem}
 
 /*# sourceMappingURL=bundle.css.map */

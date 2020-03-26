@@ -14,19 +14,12 @@
 	let synth;
 
 
-	$: {
-		if( synth ) {
-			synth.setNote( settings.baseNote + ( y * settings.noteRange ) );
-		}
-	}
-
-
 	function onClick() {
 		Tone.start();	
 	}
 
 	onMount(() => {
-		console.log( 'Synth.onMount()', Tone.Synth );
+		let interval;
 
 		synth = new Tone.Synth().toMaster();
 
@@ -35,15 +28,35 @@
 		synth.triggerAttack( 261 );
 
 
+		interval = setInterval( () => {
+			synth.frequency.rampTo( settings.baseNote + ( y * settings.noteRange ), 0.5 );
+		}, 400 );
+
+
 	    // onUnmount
 		return () => {
 			synth.triggerRelease();
+			clearInterval( interval );
 		};	    		
 	} );
 
 </script>
 
 
+
+<style>
+	.start {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		z-index: 1000;
+
+		margin: 1rem;
+	}
+</style>
+
+
 <button
 	on:click={onClick}
+	class="start"
 	>Start</button>
