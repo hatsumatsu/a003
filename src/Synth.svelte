@@ -42,7 +42,7 @@
 
 		synth = new Tone.Synth( {
 			oscillator: {
-				type: triangle
+				type: 'triangle'
 			},
 			envelope: {
 				attack: 0.000001,

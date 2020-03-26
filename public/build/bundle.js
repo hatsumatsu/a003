@@ -544,7 +544,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Start";
     			attr_dev(button, "class", "start svelte-hv7iqx");
-    			add_location(button, file$1, 98, 0, 1399);
+    			add_location(button, file$1, 98, 0, 1401);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -611,7 +611,7 @@ var app = (function () {
     		let interval;
 
     		synth = new Tone.Synth({
-    				oscillator: { type: triangle },
+    				oscillator: { type: "triangle" },
     				envelope: {
     					attack: 0.000001,
     					decay: 0.1,
