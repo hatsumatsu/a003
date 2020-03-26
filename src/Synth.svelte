@@ -6,8 +6,8 @@
 
 
 	const settings = {
-		baseNote: 261.6256,
-		noteRange: 100
+		baseNote: 261.6256, // C4
+		noteRange: 200
 	}
 
 

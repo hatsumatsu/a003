@@ -544,7 +544,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Start";
     			attr_dev(button, "class", "start svelte-h5w0eq");
-    			add_location(button, file$1, 78, 0, 1061);
+    			add_location(button, file$1, 78, 0, 1067);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -587,7 +587,12 @@ var app = (function () {
     function instance$1($$self, $$props, $$invalidate) {
     	let { x } = $$props;
     	let { y } = $$props;
-    	const settings = { baseNote: 261.6256, noteRange: 100 };
+
+    	const settings = {
+    		baseNote: 261.6256, // C4
+    		noteRange: 200
+    	};
+
     	let synth;
 
     	function onTouchStart() {
