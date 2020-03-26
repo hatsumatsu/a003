@@ -31,7 +31,7 @@
 		box-sizing: border-box;
 		display: block;
 
-		border: 2px solid #d0ff00;
+		border: 2px solid currentColor;
 		border-radius: 50%;
 	}
 </style>

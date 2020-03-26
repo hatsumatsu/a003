@@ -406,7 +406,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			span = element("span");
-    			attr_dev(span, "class", "dot svelte-1y9zjco");
+    			attr_dev(span, "class", "dot svelte-vt84qd");
     			set_style(span, "width", /*size*/ ctx[2] + "px");
     			set_style(span, "height", /*size*/ ctx[2] + "px");
     			set_style(span, "transform", "translate( " + (/*xAbsolute*/ ctx[0] - /*size*/ ctx[2] / 2) + "px, " + (/*yAbsolute*/ ctx[1] - /*size*/ ctx[2] / 2) + "px )");
@@ -543,8 +543,8 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Start";
-    			attr_dev(button, "class", "start svelte-h5w0eq");
-    			add_location(button, file$1, 80, 0, 1103);
+    			attr_dev(button, "class", "start svelte-hv7iqx");
+    			add_location(button, file$1, 98, 0, 1399);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -609,7 +609,17 @@ var app = (function () {
     	onMount(() => {
     		console.log("Synth.onMount()");
     		let interval;
-    		synth = new Tone.Synth().toMaster();
+
+    		synth = new Tone.Synth({
+    				oscillator: { type: triangle },
+    				envelope: {
+    					attack: 0.000001,
+    					decay: 0.1,
+    					sustain: 0.3,
+    					release: 1
+    				}
+    			}).toMaster();
+
     		console.log(synth);
 
     		interval = setInterval(
@@ -713,8 +723,10 @@ var app = (function () {
     function create_fragment$2(ctx) {
     	let t0;
     	let p;
+    	let t1_value = Math.round(/*x*/ ctx[0] * 1000) / 1000 + "";
     	let t1;
     	let t2;
+    	let t3_value = Math.round(/*y*/ ctx[1] * 1000) / 1000 + "";
     	let t3;
     	let t4;
     	let updating_x;
@@ -773,14 +785,15 @@ var app = (function () {
     		c: function create() {
     			t0 = space();
     			p = element("p");
-    			t1 = text(/*x*/ ctx[0]);
-    			t2 = text(" / ");
-    			t3 = text(/*y*/ ctx[1]);
+    			t1 = text(t1_value);
+    			t2 = text(" — ");
+    			t3 = text(t3_value);
     			t4 = space();
     			create_component(dot.$$.fragment);
     			t5 = space();
     			create_component(synth.$$.fragment);
     			document.title = "A003";
+    			attr_dev(p, "class", "log svelte-xacozf");
     			add_location(p, file$2, 93, 0, 2292);
     		},
     		l: function claim(nodes) {
@@ -805,8 +818,8 @@ var app = (function () {
     			];
     		},
     		p: function update(ctx, [dirty]) {
-    			if (!current || dirty & /*x*/ 1) set_data_dev(t1, /*x*/ ctx[0]);
-    			if (!current || dirty & /*y*/ 2) set_data_dev(t3, /*y*/ ctx[1]);
+    			if ((!current || dirty & /*x*/ 1) && t1_value !== (t1_value = Math.round(/*x*/ ctx[0] * 1000) / 1000 + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty & /*y*/ 2) && t3_value !== (t3_value = Math.round(/*y*/ ctx[1] * 1000) / 1000 + "")) set_data_dev(t3, t3_value);
     			const dot_changes = {};
 
     			if (!updating_x && dirty & /*x*/ 1) {

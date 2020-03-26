@@ -91,8 +91,8 @@
 
 
 
-<p>
-	{x} / {y}
+<p class="log">
+	{( Math.round( x * 1000 ) / 1000 )} — {( Math.round( y * 1000 ) / 1000 )}
 </p>
 
 
@@ -110,15 +110,20 @@
 <style>
 	:global( html ),
 	:global( body ) {
+		height: 100%;
 		margin: 0;
 		overflow: hidden;
-
-		color: #fff;
 
 		background-color: #000;
 
 		user-select: none;
 	}
+
+	:global( html ) {
+		font-family: monospace;
+		font-size: 10px;
+		color: #d0ff00;
+	}	
 
 	:global( body ) {
 		position: absolute;
@@ -127,4 +132,12 @@
 		top: 0;
 		bottom: -1px;
 	}		
+
+	.log {
+		position: absolute;
+		left: 0;
+		top: 0;
+
+		margin: 1rem;
+	}
 </style>

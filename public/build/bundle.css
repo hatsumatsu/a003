@@ -1,5 +1,5 @@
- html , body {margin:0;overflow:hidden;color:#fff;background-color:#000;user-select:none} body {position:absolute;left:0;right:0;top:0;bottom:-1px}
-.dot.svelte-1y9zjco{position:fixed;left:0;top:0;box-sizing:border-box;display:block;border:2px solid #d0ff00;border-radius:50%}
-.start.svelte-h5w0eq{position:fixed;left:0;bottom:0;z-index:1000;margin:1rem}
+ html , body {height:100%;margin:0;overflow:hidden;background-color:#000;user-select:none} html {font-family:monospace;font-size:10px;color:#d0ff00} body {position:absolute;left:0;right:0;top:0;bottom:-1px}.log.svelte-xacozf{position:absolute;left:0;top:0;margin:1rem}
+.dot.svelte-vt84qd{position:fixed;left:0;top:0;box-sizing:border-box;display:block;border:2px solid currentColor;border-radius:50%}
+.start.svelte-hv7iqx{position:absolute;right:0;top:0;z-index:1000;padding:0.1em 1em;margin:1rem;font-size:18px;color:currentColor;background-color:transparent;border:1px solid currentColor;border-radius:2px}
 
 /*# sourceMappingURL=bundle.css.map */

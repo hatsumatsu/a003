@@ -40,7 +40,17 @@
 		
 		let interval;
 
-		synth = new Tone.Synth().toMaster();
+		synth = new Tone.Synth( {
+			oscillator: {
+				type: triangle
+			},
+			envelope: {
+				attack: 0.000001,
+				decay: 0.1,
+				sustain: 0.3,
+				release: 1
+			}
+		} ).toMaster();
 
 		console.log( synth );
 
@@ -62,12 +72,20 @@
 
 <style>
 	.start {
-		position: fixed;
-		left: 0;
-		bottom: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
 		z-index: 1000;
 
+		padding: 0.1em 1em;
 		margin: 1rem;
+
+		font-size: 18px;
+		color: currentColor;
+
+		background-color: transparent;
+		border: 1px solid currentColor;
+		border-radius: 2px;
 	}
 </style>
 
@@ -81,4 +99,12 @@
 <button
 	on:click={onClick}
 	class="start"
-	>Start</button>
+	>
+	Start
+</button>
+
+
+
+
+
+
