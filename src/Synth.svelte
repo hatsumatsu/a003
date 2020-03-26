@@ -18,15 +18,21 @@
 		Tone.start();	
 	}
 
+
+	function onTouchStart() {
+		synth.triggerAttack( settings.baseNote + ( y * settings.noteRange ) );
+	}
+
+	function onTouchEnd() {
+		synth.triggerRelease();
+	}
+
 	onMount(() => {
 		let interval;
 
 		synth = new Tone.Synth().toMaster();
 
 		console.log( synth );
-
-		synth.triggerAttack( 261 );
-
 
 		interval = setInterval( () => {
 			synth.frequency.rampTo( settings.baseNote + ( y * settings.noteRange ), 0.5 );
@@ -54,6 +60,12 @@
 		margin: 1rem;
 	}
 </style>
+
+
+<svelte:window 
+	on:touchstart={onTouchStart}
+	on:touchEnd={onTouchEnd}
+/>
 
 
 <button

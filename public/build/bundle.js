@@ -544,22 +544,27 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Start";
     			attr_dev(button, "class", "start svelte-h5w0eq");
-    			add_location(button, file$1, 58, 0, 692);
+    			add_location(button, file$1, 70, 0, 897);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, button, anchor);
-    			if (remount) dispose();
-    			dispose = listen_dev(button, "click", onClick, false, false, false);
+    			if (remount) run_all(dispose);
+
+    			dispose = [
+    				listen_dev(window, "touchstart", /*onTouchStart*/ ctx[0], false, false, false),
+    				listen_dev(window, "touchEnd", /*onTouchEnd*/ ctx[1], false, false, false),
+    				listen_dev(button, "click", onClick, false, false, false)
+    			];
     		},
     		p: noop,
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(button);
-    			dispose();
+    			run_all(dispose);
     		}
     	};
 
@@ -584,11 +589,18 @@ var app = (function () {
     	const settings = { baseNote: 261.6256, noteRange: 100 };
     	let synth;
 
+    	function onTouchStart() {
+    		synth.triggerAttack(settings.baseNote + y * settings.noteRange);
+    	}
+
+    	function onTouchEnd() {
+    		synth.triggerRelease();
+    	}
+
     	onMount(() => {
     		let interval;
     		synth = new Tone.Synth().toMaster();
     		console.log(synth);
-    		synth.triggerAttack(261);
 
     		interval = setInterval(
     			() => {
@@ -614,15 +626,24 @@ var app = (function () {
     	validate_slots("Synth", $$slots, []);
 
     	$$self.$set = $$props => {
-    		if ("x" in $$props) $$invalidate(0, x = $$props.x);
-    		if ("y" in $$props) $$invalidate(1, y = $$props.y);
+    		if ("x" in $$props) $$invalidate(2, x = $$props.x);
+    		if ("y" in $$props) $$invalidate(3, y = $$props.y);
     	};
 
-    	$$self.$capture_state = () => ({ onMount, x, y, settings, synth, onClick });
+    	$$self.$capture_state = () => ({
+    		onMount,
+    		x,
+    		y,
+    		settings,
+    		synth,
+    		onClick,
+    		onTouchStart,
+    		onTouchEnd
+    	});
 
     	$$self.$inject_state = $$props => {
-    		if ("x" in $$props) $$invalidate(0, x = $$props.x);
-    		if ("y" in $$props) $$invalidate(1, y = $$props.y);
+    		if ("x" in $$props) $$invalidate(2, x = $$props.x);
+    		if ("y" in $$props) $$invalidate(3, y = $$props.y);
     		if ("synth" in $$props) synth = $$props.synth;
     	};
 
@@ -630,13 +651,13 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [x, y];
+    	return [onTouchStart, onTouchEnd, x, y];
     }
 
     class Synth extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { x: 0, y: 1 });
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { x: 2, y: 3 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -648,11 +669,11 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*x*/ ctx[0] === undefined && !("x" in props)) {
+    		if (/*x*/ ctx[2] === undefined && !("x" in props)) {
     			console_1.warn("<Synth> was created without expected prop 'x'");
     		}
 
-    		if (/*y*/ ctx[1] === undefined && !("y" in props)) {
+    		if (/*y*/ ctx[3] === undefined && !("y" in props)) {
     			console_1.warn("<Synth> was created without expected prop 'y'");
     		}
     	}
