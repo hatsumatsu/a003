@@ -25,6 +25,8 @@
 		console.log( 'Synth.onTouchStart()' );
 
 		synth.triggerAttack( settings.baseNote + ( y * settings.noteRange ) );
+
+		window.navigator.vibrate( 100 );
 	}
 
 	function onTouchEnd() {

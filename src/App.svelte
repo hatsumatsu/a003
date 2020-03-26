@@ -116,6 +116,8 @@
 		color: #fff;
 
 		background-color: #000;
+
+		user-select: none;
 	}
 
 	:global( body ) {
